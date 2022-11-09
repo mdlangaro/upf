@@ -1,0 +1,121 @@
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+<h1>3. Ambientes</h1>
+<h2>3.2. Simulação</h2>
+<h3>3.2.4. Carregando um programa bin&aacute;rio </h3>
+
+<p>H&aacute; duas maneiras de se carregar um programa em linguagem de m&aacute;quina no PHSim 2.0: atrav&eacute;s da montagem de um assembly ou entrando com as instru&ccedil;&otilde;es e os operandos codificados em bin&aacute;rio diretamente na mem&oacute;ria. Esse &uacute;ltimo m&eacute;todo &eacute; feito basicamente atrav&eacute;s dos seguintes passos: </p>
+
+<p class="item2"><strong>A.</strong> Dê um duplo clique no endereço de memória desejado, ou selecione o endereço desejado e, no menu principal, selecione Editar > Memória. Aparecerá a seguinte janela:</p>
+
+<div align="center"><img src="imagens/sim/sim15.gif"></div>
+
+<p class="item2"><strong>B.</strong> No campo "Valor", digite o código da instrução (Dica: clique em "Legenda" para ver a lista dos códigos das instruções). Obs.: os quatro últimos bits devem ser completados com 0 (zero), de acordo com o formato das instru&ccedil;&otilde;es (veja &quot;<a href="mem_sim.htm#mem_st_sim" target="_self">Segmento de texto</a>&quot;);</p>
+
+<div align="center"><img src="imagens/sim/sim16.gif"></div>
+
+<p class="item2"><strong>C.</strong> Após digitado o código da instrução, clique em "Definir", e a instrução será gravada no endereço escolhido da memória (veja no "Segmento de Texto" da memória);</p>
+
+<div align="center"><img src="imagens/sim/sim17.gif" border="1px"></div>
+
+<p class="item2"><strong>D.</strong> Note que a janela do editor de memória não fechou e, ao clicar em "Definir", o valor do endereço de memória do campo "Endereço" foi incrementado em 1. Isso é bastante conveniente, uma vez que, por exemplo, se utilizada uma instrução do tipo LDR, que tem operando em memória, não é necessário efetuar o passo 'A' novamente, tornando a programação em linguagem de máquina mais f&aacute;cil e intuitiva. Nesse caso, apenas digite o valor do operando e clique em "Definir" novamente;</p>
+
+<div align="center"><img src="imagens/sim/sim18.gif"></div>
+
+<p class="item2"><strong>E.</strong> Novamente o endereço foi incrementado em 1, para que uma nova instrução possa ser digitada.</p>
+
+<div align="center"><img src="imagens/sim/sim19.gif" border="1px"></div>
+
+<p>E assim sucessivamente até chegar à última instrução do programa. Uma vez carregadas todas as instruções, você poderá executar o programa integralmente, executar instrução-a-instrução, ou executar em RTL (ver "<a href="bf_sim.htm" target="_self">Barra de Ferramentas</a>").</p>
+
+<h3>3.2.5. Executando um programa carregado em memória<a name="sim_exec"></a></h3>
+<p>Há três formas de executar um programa carregado em memória no PHSim 2.0: a execução direta do programa, através do botão "Executar programa", a execução instrução-a-instrução e a execução em linguagem RTL (veja sessão <a href="bf_sim.htm" target="_self">4.2.1. Barra de Ferramentas</a>).</p>
+
+<h4>3.2.5.1. Executar Programa: <img src="imagens/sim/sim10.gif" border="1px" align="middle"><a name="sim_exec_ep"></a></h4>
+
+<p>Uma vez carregado um programa binário em memória, através de <strong>um único clique</strong> no botão "Executar programa", todas as instruções do programa ser&atilde;o executadas, terminando assim a execução no momento em que for atingido uma instrução <font face="Courier New, Courier, mono">HLT</font>.</p>
+<p><strong>Exemplo 1 (<a href="files/exemplos/prog10.ex1">prog10.ex1</a>):</strong> Execução de um programa que soma o conteúdo da memória no endereço 129 com o conteúdo do endereço 130, e armazena o resultado no endereço 128.</p>
+<p>Instruções e dados na memória prontos para serem executados:</p>
+<div align="center"><img src="imagens/sim/sim21.jpg" border="1px"></div>
+<p>Clicando-se no botão "Executar Programa" <img src="imagens/sim/sim23.gif" border="1px" align="middle">, é gerado o seguinte resultado:</p>
+<div align="center"><img src="imagens/sim/sim22.jpg" border="1px"></div>
+<p>Note que a última instrução executada (uma instrução antes da selecionada) foi a instrução <font face="Courier New, Courier, mono">HLT</font>, os registradores carregam os valores finais da execução e na posição 128 da memória está o resultado gerado pela execução do programa (5 + 2 = 7).</p>
+
+<h4>3.2.5.2. Executar Instrução-a-Instrução: <img src="imagens/sim/sim11.gif" border="1px" align="middle"><a name="sim_exec_eiai"></a></h4>
+<p>Nesse tipo de execução disponibilizado pelo PHSim 2.0, um dado programa carregado em memória é executado instrução-a-instrução. Cada clique no botão corresponde a uma execução.</p>
+<p><strong>Exemplo 2 (<a href="files/exemplos/prog10.ex1">prog10.ex1</a>):</strong> Execução do mesmo programa apresentado no ítem anterior, porém instrução-a-instrução.</p>
+<p>Instruções e dados prontos para serem executados:</p>
+<div align="center"><img src="imagens/sim/sim21.jpg" border="1px"></div>
+<p>Clica-se uma vez no botão <img src="imagens/sim/sim26.gif" border="1px" align="middle"> e a primeira instrução é executada, nesse caso <font face="Courier New, Courier, mono">LDR 128</font>:</p>
+<div align="center"><img src="imagens/sim/sim24.jpg" border="1px"></div>
+<p>A medida que as instruções vão sendo executadas, os registradores vão assumindo os respectivos valores gerados por cada instrução. Clicando-se mais uma vez em <img src="imagens/sim/sim26.gif" border="1px" align="middle"> a próxima instrução é executada (<font face="Courier New, Courier, mono">ADD 130</font>):</p>
+<div align="center"><img src="imagens/sim/sim25.jpg" border="1px"></div>
+<p>E assim executa-se a instrução <font face="Courier New, Courier, mono">STR 128</font> e, logo após, a instrução de parada <font face="Courier New, Courier, mono">HLT</font>, indicando o fim do programa.</p>
+<div align="center"><img src="imagens/sim/sim27.jpg" border="1px"></div><br>
+<div align="center"><img src="imagens/sim/sim22.jpg" border="1px"></div>
+<p>Esse modo de execução é interessante para a análise do estado dos registradores e da memória (segmento de dados) a medida que cada instrução é executada.</p>
+
+<h4>3.2.5.3. Executar em RTL: <img src="imagens/sim/sim12.gif" border="1px" align="middle"><a name="sim_exec_ertl"></a></h4>
+<p>A notação RTL (sigla de <i>Register Transfer Language</i>) é um formalismo para representar as transferências entre registradores, e entre registradores e memória. A notação RTL é apresentada na tabela abaixo:</p>
+
+<table width="81%" border="1" cellspacing="0" cellpadding="0" align="center">
+  <tr class="tablehead">
+    <th scope="col">Notação</th>
+    <th scope="col">Definição</th>
+    <th nowrap scope="col">Exemplo</th>
+  </tr>
+  <tr>
+    <td align="center"><span class="tblrtl"><-</span></td>
+    <td>Tranferência de conteúdo entre registrador ou entre registrador e memória.</td>
+    <td align="center" nowrap>reg1 <span class="tblrtl"><-</span> reg2</td>
+  </tr>
+  <tr>
+    <td align="center"><span class="tblrtl">MEM[end]</span></td>
+    <td>Aponta para uma posição na memória.</td>
+    <td align="center" nowrap>reg1 <span class="tblrtl"><- MEM[50]</span></td>
+  </tr>
+  <tr height="25px">
+    <td align="center" height="28"><span class="tblrtl">REG<sub>m..n</sub></span></td>
+    <td>Seleciona somente o conjunto de bits que iniciam na posição <i>m</i> e terminam na posição <i>n</i></td>
+    <td align="center" nowrap><span class="tblrtl">reg1 <- reg2 <sub>3..0</sub></span></td>
+  </tr>
+  <tr>
+    <td align="center"><p class="tblrtl">+ -  *  /</p>    </td>
+    <td>Operadores aritméticos de soma, subtração, multiplicação e divisão, respectivamente.</td>
+    <td align="center" nowrap>reg1 <span class="tblrtl"><-</span> reg1 <span class="tblrtl">+</span> reg2</td>
+  </tr>
+  <tr>
+    <td align="center"><span class="tblrtl">& | ^ !</span></td>
+    <td>Operadores bit-a-bit AND, OR, XOR e NOT, respectivamente.</td>
+    <td align="center" nowrap>reg1 <span class="tblrtl"><-</span> reg1 <span class="tblrtl">&</span> reg2</td>
+  </tr>
+  <tr>
+    <td align="center"><span class="tblrtl">SE</span> condição <span class="tblrtl">ENTÃO</span> tranferência</td>
+    <td>Transferência condicional</td>
+    <td align="center" nowrap><span class="tblrtl">SE</span> reg1 <span class="tblrtl">></span> 0 <span class="tblrtl">ENTÃO</span> reg2 <span class="tblrtl"><-</span> reg3</td>
+  </tr>
+  <tr>
+    <td align="center"><span class="tblrtl">== != < > <= >=</span></td>
+    <td>Operadores lógicos de comparação. Respectivamente, igual, diferente, menor, maior, menor que, maior que.</td>
+    <td align="center" nowrap><span class="tblrtl">SE</span> reg1<span class="tblrtl"> != </span>0 <span class="tblrtl">ENTÃO</span> reg1 <span class="tblrtl"><-</span> 0</td>
+  </tr>
+</table>
+
+<p>Nesse modo de execução, um programa é executado instrução-a-instrução, como no modo de execução anterior, porém evidenciando o caminho dos dados decorrente da execução de cada instrução, mostrando ainda os ciclos de busca da instrução na memória, busca do operando (se for o caso) e o ciclo de execução da instrução, todos independentes do código do programa carregado em memória, uma vez que estes ciclos são rotinas do processador.</p>
+<p><strong>Exemplo 3 (<a href="files/exemplos/prog10.ex1">prog10.ex1</a>):</strong> Execução do mesmo programa apresentado nos ítens anteriores.</p>
+<p>Instruções e dados carregados em memória:</p>
+<div align="center"><img src="imagens/sim/sim21.jpg" border="1px"></div>
+<p>Uma vez clicado no botão <img src="imagens/sim/sim28.gif" border="1px" align="middle">, uma caixa abre-se ao lado do segmento de dados. Nela é mostrado as tranferências que serão feitas entre registradores, e entre registradores e memória (em notação RTL) para os ciclos de busca da próxima instrução na memória, busca do operando e execução da instrução. Nessa primeira etapa, deve-se buscar uma instrução no endereço de memória apontado pelo registrador PC.</p>
+<div align="center"><img src="imagens/sim/sim30.jpg" border="1px"></div>
+<p>Para cada instrução RTL executada, o correspondente caminho dos dados é mostrado, em azul, no correspondente barramento no esquema do processador PH1. No caso da figura anterior, como REM está recebendo um valor de PC, o barramento utilizado para a tranferência dos valores fica em azul. Para executar outra instrução RTL, clica-se em <img src="imagens/sim/sim28.gif" border="1px" align="middle">. Note que de acordo com a instrução, a cor dos barramentos utilizados mudam. Após o ciclo de busca da instrução estar completo, o registrador RI estará com o valor da instrução que estava no endereço de memória buscado pelo ciclo, então o ciclo de busca do operando será iniciado:</p>
+<div align="center"><img src="imagens/sim/sim31.jpg" border="1px"></div>
+<p>Note que a posição selecionada no segmento de texto mudou para o endereço de memória indicado no registrador PC. Então o operando é buscado, e o ciclo de execução da instrução carregada em RI pode iniciar:</p>
+<div align="center"><img src="imagens/sim/sim32.jpg" border="1px"></div>
+<p>Da mesma forma que o modo de execução anterior (Instrução-a-Instrução), a execução em RTL terminará quando for executada a instrução HLT.</p>
+</body>
+</html>

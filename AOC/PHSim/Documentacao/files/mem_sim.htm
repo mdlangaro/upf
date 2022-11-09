@@ -1,0 +1,49 @@
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+<h1>3. Ambientes</h1>
+<h2>3.2. Simulação</h2>
+
+<h3>3.2.2. Memória</h3>
+<p>Como o PH1 &eacute; um processador que trabalha com uma palavra de m&aacute;quina de 8 bits (para dados e endere&ccedil;os), ele conta com 256 bytes de mem&oacute;ria, ou seja, consegue endere&ccedil;ar no m&aacute;ximo 256 posi&ccedil;&otilde;es de mem&oacute;ria (de 0 &agrave; 255), as quais s&atilde;o suficientes para a compreens&atilde;o do funcionamento de um processador comum, como o PH1.</p>
+<p>A mem&oacute;ria do PH1 &eacute; classificada no PHSim em duas partes: segmento de texto e segmento de dados.</p>
+<div align="center"><img src="imagens/sim/sim13.jpg" border="1px"></div>
+
+<h4>3.2.2.1. Segmento de texto<a name="mem_st_sim"></a></h4>
+<p>No PHSim, o segmento de texto abrange o endereço 0 (zero) at&eacute; o endereço 127. No segmento de texto ficam armazenadas as instruções (com ou sem operando em mem&oacute;ria) do programa em linguagem de máquina (binário), onde cada instrução também é representada pelo seu código na base decimal, e seu respectivo mnemônico.</p>
+<div align="center"><img src="imagens/sim/sim14.jpg" border="1px"></div>
+<p>As instruções do PH1 são classificadas em dois formatos distintos: com operando e sem operando. As instruções com operando (instruções com refer&ecirc;ncia a operando na memória ou instuções de desvio) ocupam 2 bytes de memória, sendo que no primeiro byte é armazenada o código da instrução e no byte consecutivo o operando.</p>
+
+<table width="40%" cellspacing="0" cellpadding="0" align="center" border="1px" bgcolor="#EFEFEF">
+  <tr>
+    <td width="50%" nowrap><div align="center">4 bits: Código</div></td>
+    <td nowrap><div align="center">4 bits: Sempre '0000'</div></td>
+  </tr>
+  <tr>
+    <td colspan="2" nowrap><div align="center">8 bits: Endereço de memória</div></td>
+  </tr>
+</table>
+
+<p>Os últimos quatro bits do código da instrução são sempre descartados, não importando, dessa forma, seus estados.</p>
+<p>O outro formato das instruções do PH1 são as que não usam operando em memória. Tais instruções utilizam apenas 1 byte da memória para serem armazenadas, ou seja, apenas seu respectivo código. São menos comuns que as instruções que possuem operando e memória.</p>
+
+<table width="40%" cellspacing="0" cellpadding="0" border="1px" bgcolor="#EFEFEF" align="center">
+  <tr>
+    <td width="50%" nowrap><div align="center">4 bits: Código</div></td>
+    <td nowrap><div align="center">4 bits: Sempre '0000'</div></td>
+  </tr>
+</table>
+
+
+
+<h4>3.2.2.2. Segmento de Dados<a name="mem_sd_sim"></a></h4>
+<p>No segmento de dados ficam armazenados os dados que serão utilizados pelas instruções ou referenciados pelos operandos das instruções. No PH1, o segmento de dados inicia no endereço 128 e segue até o fim da memória (endereço 255).</p>
+<div align="center"><img src="imagens/sim/sim20.jpg" border="1px"></div>
+
+
+</body>
+</html>

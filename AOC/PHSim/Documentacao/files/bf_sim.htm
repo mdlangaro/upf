@@ -1,0 +1,59 @@
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+<h1>3. Ambientes</h1>
+<h2>3.2. Simulação</h2>
+<h3>3.2.1. Barra de ferramentas<a name="bf_sim"></a></h3>
+<div align="center"><img src="imagens/sim/sim04.gif" border="0"></div><br>
+
+
+<table width="100%"  border="1" cellspacing="0" cellpadding="3">
+  <tr class="tablehead">
+    <th scope="col">Ícone</th>
+    <th scope="col">Função</th>
+    <th scope="col">Descrição</th>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim05.gif" border="1px"></td>
+    <td nowrap>Resetar Memória</td>
+    <td>Apaga todo conteúdo da memória do PH1. Caso a memória tenha sido alterada, haverá a opção de salvar as alterações para um arquivo de memória (extenção .ex1).</td>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim06.gif" border="1px"></td>
+    <td nowrap>Abrir arquivos binários</td>
+    <td>Carrega um arquivo de memória salvo anteriormente.</td>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim07.gif" border="1px"></td>
+    <td>Salvar e salvar como (respectivamente)</td>
+    <td>Salva as alterações feitas na memória. "Salvar como" também tem a propriedade de salvar as alterações para um novo arquivo.</td>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim08.gif" border="1px"></td>
+    <td>Recarga do Último Arquivo</td>
+    <td>Ignora as alterações feitas na memória e recarrega incondicionalmente o arquivo atual (o qual deve ter sido salvo anteriormente). Equivale à função do botão "Abrir arquivos binários".</td>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim10.gif" border="1px"></td>
+    <td>Executar Programa</td>
+    <td>Executa todas as instruções do programa carregado na memória.</td>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim11.gif" border="1px"></td>
+    <td>Executar Instução-a-Instução</td>
+    <td>Executa instrução por instrução do programa de forma que pode-se acompanhar cada etapa da execução (tanto na memória, quanto nos registradores). Cada vez que clica-se no botão, uma instrução completa é executada até que seja atingido a instrução final do programa (normalmente HLT).</td>
+  </tr>
+  <tr>
+    <td><img src="imagens/sim/sim12.gif" border="1px"></td>
+    <td>Executar em RTL</td>
+    <td>Executa cada instrução em notação RTL (<i>Register Transfer Language</i>), mostrando todas as tranferências feitas entre registradores no ciclo de busca da instrução, busca do operando (se necessário) e no ciclo de execução da instrução. Funciona da mesma maneira que o botão "Executar Intrução-a-Instrução", porém, cada vez que o botão é pressionado, uma instrução RTL é executada. Para melhor compreensão das tranferências entre registradores resultante de cada instrução RTL, a cor do respectivo barramento utilizado, no esquema do PH1, muda para azul para indicar a tranferência.</td>
+  </tr>
+</table>
+
+
+</body>
+</html>

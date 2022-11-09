@@ -1,0 +1,183 @@
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="style.css" type="text/css">
+
+</head>
+
+<body>
+<h1>3. Ambientes</h1>
+<h2>3.1. Desenvolvimento</h2>
+<h3>3.1.2. Montador</h3>
+<p>O ambiente de desenvolvimento do PHSim 2.0, é, essencialmente, um montador (ou assembler) que monta e gera o código binário de cada instrução ou dado, para que no ambiente de simulação tal programa possa ser executado.</p>
+<p>A vantagem da programação em assembly, comparada com a programação em linguagem de máquina, é que o programador não tem a responsabilidade de escolher em que posição da memória ficarão os dados, além da programação ser mais intuitiva, uma vez que utiliza-se nomes simbólicos para representar o código binário das instruções.</p>
+
+<h4><a name="des_montador_mph1">3.1.2.1. Mnemônicos do PH1</a></h4>
+<p>O PH1 é um processador que trabalha com uma palavra de máquina de 8 bits, porém utiliza apenas 4 bits para representar seu conjunto de 16 instruções, as quais são suficientes para se entender o funcionamento de um processador simples. Tal conjunto de instruções é listado abaixo:</p>
+
+<table width="100%"  border="1" cellspacing="0" cellpadding="0" align="center">
+  <tr class="tablehead">
+    <th scope="col">Código</th>
+    <th scope="col">Mnemônico</th>
+    <th scope="col">Função</th>
+    <th scope="col">RTL</th>
+  </tr>
+  <tr class="tblrtl">
+    <td>0000</td>
+    <td>NOP</td>
+    <td>Não executa operação alguma</td>
+    <td nowrap>-</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0001</td>
+    <td>LDR end</td>
+    <td>Carrega um valor em registrador</td>
+    <td nowrap>AC <- MEM[end]</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0010</td>
+    <td>STR end </td>
+    <td>Armazena um valor na mem&oacute;ria </td>
+    <td nowrap>MEM[end] &lt;- AC </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0011</td>
+    <td>ADD end </td>
+    <td>Adi&ccedil;&atilde;o</td>
+    <td nowrap>AC &lt;- AC + MEM[end] </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0100</td>
+    <td>SUB end </td>
+    <td>Subtra&ccedil;&atilde;o</td>
+    <td nowrap>AC &lt;- AC - MEM[end]</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0101</td>
+    <td>MUL end </td>
+    <td>Multiplica&ccedil;&atilde;o</td>
+    <td nowrap>AC &lt;- AC * MEM[end]</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0110</td>
+    <td>DIV end </td>
+    <td>Divis&atilde;o</td>
+    <td nowrap>AC &lt;- AC / MEM[end] </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>0111</td>
+    <td>NOT</td>
+    <td>Nega&ccedil;&atilde;o bit-a-bit </td>
+    <td nowrap>AC &lt;- !AC </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1000</td>
+    <td>AND end </td>
+    <td>Opera&ccedil;&atilde;o l&oacute;gica 'E'</td>
+    <td nowrap>AC &lt;- AC &amp; MEM[end]</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1001</td>
+    <td>OR end </td>
+    <td>Opera&ccedil;&atilde;o l&oacute;gica 'OU' </td>
+    <td nowrap>AC &lt;- AC | MEM[end]</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1010</td>
+    <td>XOR end </td>
+    <td>Opera&ccedil;&atilde;o l&oacute;gica 'OU' exclusivo</td>
+    <td nowrap>AC &lt;- AC ^ MEM[end]</td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1011</td>
+    <td>JMP end </td>
+    <td>Desvio incondicional </td>
+    <td nowrap>PC &lt;- end </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1100</td>
+    <td>JEQ end </td>
+    <td>Desvio condicional, caso AC==0</td>
+    <td nowrap>se AC==0 entao PC &lt;- end </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1101</td>
+    <td>JG end </td>
+    <td>Desvio condicional, caso AC&gt;0 </td>
+    <td nowrap>se AC&gt;0 entao PC &lt;- end </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1110</td>
+    <td>JL end </td>
+    <td>Desvio condicional, caso AC&lt;0 </td>
+    <td nowrap>se AC&lt;0 entao PC &lt;- end </td>
+  </tr>
+  <tr class="tblrtl">
+    <td>1111</td>
+    <td>HLT</td>
+    <td>T&eacute;rmino de execu&ccedil;&atilde;o</td>
+    <td nowrap>-</td>
+  </tr>
+</table>
+
+<p>As instruções sem a palavra <i>end</i> ao lado, são instruções que não possuem operando em memória (veja sessão <a href="mem_sim.htm#mem_st_sim" target="_self">3.2.2.1. Segmento de texto</a>). A coluna <strong>RTL</strong> mostra a tranferência a nível de registrador executada pela instrução. Na sessão "<a href="prog_sim.htm#sim_exec_ertl" target="_self">3.2.5.3. Executar em RTL</a>" há uma lista com toda notação RTL utilizada.</p>
+<p>Todas as operações são feitas com base no registrador <font face="Courier New, Courier, mono">AC</font> (acumulador), o qual é o único disponível para o programador.</p>
+
+<h4>3.1.2.2. Elementos de um programa em assembly<a name="des_montador_epa" id="des_montador_epa"></a></h4>
+<p>Um programa escrito em linguagem de montagem (assembly), pode conter, além dos mnemônicos que serão convertidos para linguagem de máquina, diretivas e coment&aacute;rios. </p>
+<p>Os comentários são utilizados apenas para documentação do programa, uma vez que são ignorados no processo de montagem. Um comentário no PHSim 2.0 é feito através de um ponto-e-vírgula (<font face="Courier New, Courier, mono">;</font>), sendo que qualquer texto que estiver após ele <i>na linha</i> será ignorado pelo montador.
+<p>As diretivas servem apenas para indicar ao montador uma determinada situação, não sendo convertida para linguagem de máquina, como as demais instruções apresentadas no ítem anterior.</p>
+<p>No PHSim 2.0 há basicamente três diretivas importantes, que o programador deve ter conhecimento: a diretiva <font face="Courier New, Courier, mono">text</font>, a diretiva <font face="Courier New, Courier, mono">data</font> e a diretiva <font face="Courier New, Courier, mono">byte</font>.</p>
+
+<ul>
+   <li>A diretiva <font face="Courier New, Courier, mono">text</font> informa ao montador o início do segmento de texto do programa, ou seja, as instruções deverão ser armazenadas na memória a partir do endereço 0 (zero).</li>
+   <li>A diretiva <font face="Courier New, Courier, mono">data</font> informa ao montador o início do segmento de dados, ou seja, os dados das linhas subseqüêntes à essa diretiva deverão ser armazenados a partir do endereço 128 da memória.</li>
+   <li>A diretiva <font face="Courier New, Courier, mono">byte</font> tem a finalidade de informar ao montador que o um determinado número inteiro escrito logo após ela deve ser armazenado como um byte (usado no segmento de dados, para armazenar valores numéricos).</li>
+</ul>
+<p>Exemplo de um programa em linguagem de montagem:</p>
+
+<!--StartFragment--><pre><code><font color="#000000">     <font color="#008000"><b>text    </b></font><font color="#FF0000"><i>; in&iacute;cio do programa no endere&ccedil;o 0
+     </i></font><font color="#000080"><b>LDR </b></font>b
+     <font color="#000080"><b>ADD </b></font>c
+     <font color="#000080"><b>STR </b></font>a
+     <font color="#000080"><b>HLT
+     
+     </b></font><font color="#008000"><b>data    </b></font><font color="#FF0000"><i>; in&iacute;cio dos dados no endere&ccedil;o 128
+</i></font>a<font color="#800000">:   </font><font color="#008000"><b>byte </b></font><font color="#800000">0
+</font>b<font color="#800000">:   </font><font color="#008000"><b>byte </b></font><font color="#800000">5
+</font>c<font color="#800000">:   </font><font color="#008000"><b>byte </b></font><font color="#800000">2</font><font color="#800000">
+</font></code></pre>
+<!--EndFragment-->
+
+<p>No exemplo acima, são usados <i>rótulos</i> para referenciar os endereços de memória que o programa irá utilizar. Um rótulo pode ser utilizado tanto em instruções de desvio, no segmento de texto, quanto antes das diretivas <i>byte</i>, no segmento de dados, para referenciar um valor numérico.</p>
+
+<h4>3.1.2.3. Montagem de um programa<a name="des_montador_mont" id="des_montador_mont"></a></h4>
+
+<p>A montagem de um programa em assembly no PHSim 2.0 é bastante simples. O assembler do PHSim 2.0 é um montador de dois passos, ou seja, percorre o código do programa duas vezes.
+<p>Na primeira vez, ele monta uma tabela (chamada de <i>tabela de símbolos</i>) com todos os rótulos contidos no programa e o endereço de memória que cada rótulo refere.</p>
+<p>Na segunda passagem, ocorre a geração do código binário, resultante dos mnemônicos presentes no código, e a "substituição" dos rótulos pelos seus respectivos endereços de memória gerados pela primeira passagem.</p>
+<p>Além da criação da tabela de símbolos e da geração do código binário, o montador ainda verifica por erros no programa, como a digitação de uma instrução desconhecida ou a entrada de um número fora da faixa de representação do processador.</p>
+<p>Veja o exemplo abaixo (<a href="files/exemplos/prog00.asm">prog00.asm</a>):</p>
+<!--StartFragment--><pre><code><font color="#000000">     <font color="#008000"><b>text
+     </b></font><font color="#000080"><b>LDR </b></font>b
+     <font color="#000080"><b>ADD </b></font>c
+     <font color="#000080"><b>STR </b></font>a
+     <font color="#000080"><b>HLT
+
+     </b></font><font color="#008000"><b>data
+</b></font>a<font color="#800000">:   </font><font color="#008000"><b>byte </b></font><font color="#800000">0
+</font>b<font color="#800000">:   </font><font color="#008000"><b>byte </b></font><font color="#800000">5
+</font>c<font color="#800000">:   </font><font color="#008000"><b>byte </b></font><font color="#800000">2
+</font></code></pre><!--EndFragment-->
+
+<p>Uma vez digitado um programa em assembly, a montagem é feita clicando no botão <img src="imagens/des/des10.gif" border="1px" align="middle">, localizado na barra de ferramentas.</p>
+<p>Se um programa for montado com sucesso, abre-se então uma janela mostrando a tabela de símbolos (primeiro passo) e o segmento de texto e de dados da memória representando o programa armazenado em linguagem de máquina (segundo passo). Montando-se o exemplo acima, obtém-se o seguinte resultado:</p>
+
+<div align="center"><img src="imagens/des/des11.jpg" border="0"></div>
+
+<p>As palavras em azul <i>Text</i> e <i>Data</i> na janela acima podem ser usadas para "pular" diretamente para o segmento de texto e para o segmento de dados, respectivamente.</p>
+<p>A partir de agora, clica-se em OK e o programa escrito em linguagem de montagem é transferido para a sessão de simulação, para que o mesmo possa ser executado através desse ambiente (veja a sessão 3.2.5. <a href="prog_sim.htm#sim_exec" target="_self">Executando um programa carregado em memória</a>).</p>
+
+
+</body>
+</html>
